@@ -18,7 +18,7 @@ export const usersController = (app: Elysia) => {
         '',
         async ({ jwt, body, set }) => {
           try {
-            const newUser = toUserEntity(body);
+            const newUser = await toUserEntity(body);
             const savedUser = await newUser.save();
 
             const accessToken = await jwt.sign({ userId: savedUser._id });

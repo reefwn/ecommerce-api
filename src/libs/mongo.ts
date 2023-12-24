@@ -1,4 +1,6 @@
 export const mapError = (error: any): { message: string, status: number } => {
+  console.log('mapError', error)
+
   if (error.name === 'ValidationError') return { message: error.message, status: 400 };
 
   if (error.name === 'MongoServerError') {
