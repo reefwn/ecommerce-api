@@ -11,6 +11,7 @@ services:
     ports: ["3000:3000"]
     # setup a host mounted volume to sync changes to the container
     volumes: ["./:/home/bun/app"]
+    env_file: .env
 
   mongo:
     image: mongo

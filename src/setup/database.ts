@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
+import { mongoUri } from './config';
 
-const mongoDBURI = process.env.MONGODB_URI ?? 'mongodb://localhost:27017';
-
-mongoose.connect(mongoDBURI);
+mongoose.connect(mongoUri)
+  .then(() => console.log('🦝 Mongo DB is connected'));
 
 export default mongoose;
