@@ -3,6 +3,7 @@ import { jwt } from '@elysiajs/jwt';
 import { toUserEntity } from '../libs/users';
 import { jwtExp, jwtSecret } from '../setup/config';
 import { mapError } from '../libs/mongo';
+import { loadTemplate, sendEmail } from '../libs/email';
 
 export const usersController = (app: Elysia) => {
   return app.group('/users', (user) =>
@@ -22,6 +23,9 @@ export const usersController = (app: Elysia) => {
             const savedUser = await newUser.save();
 
             const accessToken = await jwt.sign({ userId: savedUser._id });
+
+            const template = loadTemplate('confirm-register.hbs', {});
+            await sendEmail(savedUser.email, 'Confirm Your Email!', template)
 
             set.headers = { authorization: accessToken };
             set.status = 201;

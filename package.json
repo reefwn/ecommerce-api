@@ -11,9 +11,12 @@
     "@elysiajs/jwt": "^0.7.1",
     "@elysiajs/swagger": "^0.7.4",
     "elysia": "latest",
-    "mongoose": "^8.0.3"
+    "handlebars": "^4.7.8",
+    "mongoose": "^8.0.3",
+    "nodemailer": "^6.9.7"
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.14",
     "bun-types": "latest"
   },
   "module": "src/index.js"
