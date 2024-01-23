@@ -24,7 +24,7 @@ export const usersController = (app: Elysia) => {
 
             const accessToken = await jwt.sign({ userId: savedUser._id });
 
-            const template = loadTemplate('confirm-register.hbs', {});
+            const template = loadTemplate('confirm-registration.hbs', {});
             await sendEmail(savedUser.email, 'Confirm Your Email!', template)
 
             set.headers = { authorization: accessToken };
