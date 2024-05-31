@@ -2,9 +2,22 @@ import { t } from "elysia";
 
 export const CreateCategoryDto = t.Object({
   name: t.String(),
-  attributes: t.Array(t.Object({
-    name: t.String(),
-    type: t.String(),
-    required: t.Boolean()
-  }))
+  attributes: t.Array(
+    t.Object({
+      name: t.String(),
+      type: t.String(),
+      required: t.Boolean()
+    })
+  )
+})
+
+export const UpdateCategoryDto = t.Object({
+  name: t.String(),
+  attributes: t.Array(
+    t.Object({
+      name: t.String(),
+      type: t.String(),
+      required: t.Boolean()
+    })
+  )
 })

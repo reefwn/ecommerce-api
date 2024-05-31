@@ -15,3 +15,15 @@ export const saveCategory = async (category: ICategory) => {
 
   return newCategory
 }
+
+export const updateCategory = async (id: string, category: ICategory) => {
+  const updatedCategory = await Category.findByIdAndUpdate(
+    id,
+    category,
+    { new: true, runValidators: true }
+  ).exec()
+
+  if (!updatedCategory) throw new Error("CATEGORY_NOT_FOUND")
+
+  return updatedCategory
+}
