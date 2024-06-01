@@ -4,6 +4,8 @@ import { categoryLib } from '../../libs'
 import { ICategory } from '../../entities/categories'
 
 export default (app: Elysia) => {
+  const tags = ['[Admin] Categories']
+
   return app.group('/categories', (category) =>
     category
       // Get categories
@@ -13,7 +15,12 @@ export default (app: Elysia) => {
           const categories = await categoryLib.getCategories()
 
           set.status = 200
-          return categories.map((category) => category.toJSON())
+          return categories
+        },
+        {
+          detail: {
+            tags
+          }
         }
       )
       // Get category by ID
@@ -23,10 +30,13 @@ export default (app: Elysia) => {
           const category = await categoryLib.getCategoriesById(params.id)
 
           set.status = 200
-          return category.toJSON()
+          return category
         },
         {
-          params: IdDto
+          params: IdDto,
+          detail: {
+            tags
+          }
         }
       )
       // Create category
@@ -37,10 +47,13 @@ export default (app: Elysia) => {
           const newCategory = await categoryLib.saveCategory(body as ICategory)
 
           set.status = 201
-          return newCategory.toJSON()
+          return newCategory
         },
         {
-          body: CreateCategoryDto
+          body: CreateCategoryDto,
+          detail: {
+            tags
+          }
         }
       )
       // Update category
@@ -53,11 +66,14 @@ export default (app: Elysia) => {
           )
 
           set.status = 200
-          return updatedCategory.toJSON()
+          return updatedCategory
         },
         {
           params: IdDto,
-          body: CreateCategoryDto
+          body: CreateCategoryDto,
+          detail: {
+            tags
+          }
         }
       )
       // Delete category
@@ -70,7 +86,10 @@ export default (app: Elysia) => {
           return { isDeleted: true }
         },
         {
-          params: IdDto
+          params: IdDto,
+          detail: {
+            tags
+          }
         }
       )
   )

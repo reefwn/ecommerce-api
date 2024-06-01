@@ -8,7 +8,8 @@ const Error = {
 }
 
 export const getCategories = async () => {
-  return Category.find().exec()
+  const categories = await Category.find().exec()
+  return categories.map((category) => category.toJSON())
 }
 
 export const getCategoriesById = async (id: string) => {
@@ -16,7 +17,7 @@ export const getCategoriesById = async (id: string) => {
 
   if (!category) throw error(404, Error.NOT_FOUND)
 
-  return category
+  return category.toJSON()
 }
 
 export const validateName = async (name: string) => {
@@ -31,7 +32,7 @@ export const saveCategory = async (category: ICategory) => {
 
   await newCategory.save()
 
-  return newCategory
+  return newCategory.toJSON()
 }
 
 export const updateCategory = async (id: string, category: ICategory) => {
@@ -43,7 +44,7 @@ export const updateCategory = async (id: string, category: ICategory) => {
 
   if (!updatedCategory) throw error(404, Error.NOT_FOUND)
 
-  return updatedCategory
+  return updatedCategory.toJSON()
 }
 
 export const deleteCategory = async (id: string) => {

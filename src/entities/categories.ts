@@ -1,4 +1,4 @@
-import { Document, Schema, model } from "mongoose";
+import { Document, Schema, model } from 'mongoose';
 
 export interface IAttribute {
   name: string;
@@ -25,7 +25,7 @@ const schema = new Schema<ICategory>(
       type: {
         type: String,
         required: true,
-        enum: ["String", "Number", "Boolean"],
+        enum: ['String', 'Number', 'Boolean'],
       },
       required: {
         type: Boolean,
@@ -38,4 +38,4 @@ const schema = new Schema<ICategory>(
   }
 );
 
-export default model<ICategory>("categories", schema);
+export default model<ICategory>('categories', schema);
