@@ -1,1 +1,1 @@
-export * as categoryLib from "./categories";
+export * as categoryLib from './categories'

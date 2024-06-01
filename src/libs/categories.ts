@@ -1,9 +1,27 @@
-import { Category } from "../entities"
-import { ICategory } from "../entities/categories"
+import { error } from 'elysia'
+import { Category } from '../entities'
+import { ICategory } from '../entities/categories'
+
+const Error = {
+  NOT_FOUND: 'CATEGORY_NOT_FOUND',
+  ALREADY_EXISTS: 'CATEGORY_ALREADY_EXISTS'
+}
+
+export const getCategories = async () => {
+  return Category.find().exec()
+}
+
+export const getCategoriesById = async (id: string) => {
+  const category = await Category.findById(id).exec()
+
+  if (!category) throw error(404, Error.NOT_FOUND)
+
+  return category
+}
 
 export const validateName = async (name: string) => {
   const category = await Category.findOne({ name }).exec()
-  if (category) throw new Error("CATEGORY_ALREADY_EXISTS")
+  if (category) throw error(409, Error.ALREADY_EXISTS)
 }
 
 export const saveCategory = async (category: ICategory) => {
@@ -23,7 +41,13 @@ export const updateCategory = async (id: string, category: ICategory) => {
     { new: true, runValidators: true }
   ).exec()
 
-  if (!updatedCategory) throw new Error("CATEGORY_NOT_FOUND")
+  if (!updatedCategory) throw error(404, Error.NOT_FOUND)
 
   return updatedCategory
+}
+
+export const deleteCategory = async (id: string) => {
+  const deletedCategory = await Category.findByIdAndDelete(id).exec()
+
+  if (!deletedCategory) throw error(404, Error.NOT_FOUND)
 }
