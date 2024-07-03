@@ -7,24 +7,15 @@ export default (app: Elysia) => {
 
   return app.group('/products', (product) =>
     product
-      // Create product
-      .post(
+      // Get product list
+      .get(
         '',
-        async ({ body, set }) => {
-          const { category, specifications } = body
+        async () => {
+          const product = await productLib.getProductList()
 
-          await productLib.validateProductSpecifications(
-            category,
-            specifications
-          )
-
-          const product = await productLib.saveProduct(body)
-
-          set.status = 201
           return product
         },
         {
-          body: createProductDto,
           detail: {
             tags
           }

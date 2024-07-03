@@ -64,3 +64,8 @@ export const saveProduct = async (product: CreateProductDto) => {
 
   return newProduct.toJSON()
 }
+
+export const getProductList = async () => {
+  const products = await Product.find().exec()
+  return products.map(product => product.toJSON())
+}
