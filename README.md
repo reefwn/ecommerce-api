@@ -10,6 +10,10 @@ ref: https://elysiajs.com/quick-start.html#structure
 bun dev
 ```
 
+```bash
+docker compose up -d
+```
+
 ## Technologies & IDE
 
 <div>
